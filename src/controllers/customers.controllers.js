@@ -13,7 +13,7 @@ export async function postNewCustomer(req, res) {
 
 export async function putCustomer(req, res) {
     const {name, phone, cpf, birthday} = res.locals.customer;
-    const id = req.params;
+    const {id} = res.locals.id;
 
     try {
         await connectionDB.query(`UPDATE customers (name=$1, phone=$2, cpf=$3, birthday=$4) WHERE id=$5;`, [name, phone, cpf, birthday, id]);
