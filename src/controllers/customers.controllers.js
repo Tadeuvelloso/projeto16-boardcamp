@@ -32,3 +32,14 @@ export async function getAllCustomers(req, res) {
         return res.status(500).send(error.message);
     }
 }
+
+export async function getCustomerById (req, res) {
+    const { id } = res.locals.id;
+
+    try {
+        const customerById = await connectionDB.query("SELECT * FROM customers WHERE id=$1;", [id])
+        res.send(customerById.rows[0]);
+    } catch (error) {
+        return res.status(500).send(error.message);
+    }
+}
