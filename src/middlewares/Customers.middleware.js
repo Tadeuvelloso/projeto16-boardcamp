@@ -38,7 +38,7 @@ export async function checkCustomerInDataBase (req, res, next) {
 
 export async function checkCustomerIdInDataBase (req, res, next) {
     const customer = res.locals.customer;
-    const id = res.params;
+    const id = req.params;
 
     try {
        const cpfCustomerExist = await connectionDB.query(`SELECT * FROM customers WERE cpf=$1 ;`, [customer.cpf])
