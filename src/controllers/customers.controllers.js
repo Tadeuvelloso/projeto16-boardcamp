@@ -33,7 +33,7 @@ export async function getAllCustomers(req, res) {
     }
 }
 
-export async function getCustomerById (req, res) {
+export async function getCustomerById(req, res) {
     const { id } = res.locals.id;
 
     try {
