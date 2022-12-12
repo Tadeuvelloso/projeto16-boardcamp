@@ -19,3 +19,19 @@ export function checkCustomerBody (req, res, next){
     next();
 }
 
+export async function checkCustomerInDataBase (req, res, next) {
+    const customer = res.locals.customer;
+
+    try {
+       const cpfCustomerExist = await connectionDB.query(`SELECT * FROM customers WERE cpf=$1 ;`, [customer.cpf])
+
+        if(cpfCustomerExist.rows[0]){
+            return res.sendStatus(409)
+        }
+    } catch (error){
+        return res.status(500).send(error.message);
+    }
+
+    res.locals.customer = customer;
+    next();
+}
