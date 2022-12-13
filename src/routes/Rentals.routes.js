@@ -1,9 +1,12 @@
 import { Router } from "express";
-
-//importa os controllers
+import { getAllRentals, postNewRental, deleteRental, postReturnRental } from "../controllers/rentals.controllers.js";
+import { checkBodyRentalsObj, checkIdsInDb} from "../middlewares/Rentals.middleware.js"
 
 const router = Router();
 
-//faz o router.post ou .get....
+router.get("/rentals", getAllRentals);
+router.post("/rentals", checkBodyRentalsObj, checkIdsInDb, postNewRental);
+router.post("/rentals/:id/return", checkBodyRentalsObj, postReturnRental);
+router.delete("/rentals/:id", deleteRental);
 
 export default router;
